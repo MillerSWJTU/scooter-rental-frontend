@@ -1,0 +1,9 @@
+<svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">  
+  <rect width="120" height="40" fill="pink"/>  
+  <path d="M20 10 L30 10 L40 30 L10 30 Z" fill="#4CAF50" />  
+  <circle cx="15" cy="33" r="5" fill="#333" />  
+  <circle cx="35" cy="33" r="5" fill="#333" />  
+  <text x="55" y="25" font-family="Arial" font-size="14" font-weight="bold" fill="#333">  
+    E-Scooter  
+  </text>  
+</svg>

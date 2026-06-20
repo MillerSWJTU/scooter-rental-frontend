@@ -1,0 +1,20 @@
+{
+  "appId": "com.example.app",
+  "appName": "ScooterRent",
+  "webDir": "build",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https",
+    "allowMixedContent": true,
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true,
+    "webViewAllowingMixedContent": true,
+    "captureInput": true,
+    "initialFocus": true
+  },
+  "webView": {
+    "allowMixedContent": true
+  }
+} 

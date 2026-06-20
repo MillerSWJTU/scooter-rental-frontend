@@ -1,0 +1,268 @@
+/* ScooterDetails.css */  
+.scooter-details-container {  
+    margin-bottom: 2rem;  
+    height: 100vh;  
+    display: flex;  
+    flex-direction: column;  
+  }  
+  
+  .back-button {  
+    color: #495057;  
+    text-decoration: none;  
+    font-weight: 500;  
+  }  
+  
+  .back-button:hover {  
+    color: #0d6efd;  
+  }  
+  
+  .scooter-main-image {  
+    position: relative;  
+    border-radius: 10px;  
+    overflow: hidden;  
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  
+  }  
+  
+  .scooter-id-badge {  
+    position: absolute;  
+    top: 15px;  
+    right: 15px;  
+    background: rgba(0, 0, 0, 0.6);  
+    color: #fff;  
+    padding: 4px 8px;  
+    border-radius: 4px;  
+    font-size: 0.8rem;  
+    font-weight: 500;  
+  }  
+  
+  .price-option {  
+    text-align: center;  
+    padding: 10px;  
+    background-color: #f8f9fa;  
+    border-radius: 8px;  
+    margin-bottom: 10px;  
+  }  
+  
+  .price-duration {  
+    font-size: 0.9rem;  
+    color: #495057;  
+  }  
+  
+  .price-amount {  
+    font-weight: 700;  
+    font-size: 1.1rem;  
+    color: #0d6efd;  
+  }  
+  
+  .specs-list .list-group-item {  
+    border: none;  
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);  
+  }  
+  
+  .specs-list .list-group-item:last-child {  
+    border-bottom: none;  
+  }  
+  
+  .feature-badge {  
+    padding: 8px 12px;  
+    margin-right: 8px;  
+    margin-bottom: 8px;  
+    border-radius: 20px;  
+  }  
+  
+  .rating-summary {  
+    text-align: center;  
+  }  
+  
+  .average-rating {  
+    font-size: 2rem;  
+    font-weight: 700;  
+    color: #0d6efd;  
+  }  
+  
+  .review-count {  
+    font-size: 0.9rem;  
+    color: #6c757d;  
+  }  
+  
+  .reviews-list {  
+    max-height: 400px;  
+    overflow-y: auto;  
+  }  
+  
+  .review-item {  
+    padding: 15px 0;  
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);  
+  }  
+  
+  .review-item:last-child {  
+    border-bottom: none;  
+  }  
+  
+  .reviewer-name {  
+    font-weight: 500;  
+  }  
+  
+  .review-date {  
+    font-size: 0.8rem;  
+  }  
+  
+  .maintenance-timeline {  
+    position: relative;  
+  }  
+  
+  .maintenance-item {  
+    display: flex;  
+    margin-bottom: 20px;  
+    position: relative;  
+  }  
+  
+  .maintenance-status {  
+    margin-right: 15px;  
+    padding-top: 2px;  
+  }  
+  
+  .maintenance-content {  
+    flex: 1;  
+  }  
+  
+  .maintenance-date {  
+    font-size: 0.9rem;  
+    color: #6c757d;  
+    margin-bottom: 5px;  
+  }  
+  
+  .maintenance-description {  
+    margin-bottom: 5px;  
+  }  
+  
+  .maintenance-resolution {  
+    font-size: 0.9rem;  
+  }  
+  
+  .details-header {  
+    padding: 15px 20px;  
+    background-color: white;  
+    border-bottom: 1px solid #eee;  
+    display: flex;  
+    justify-content: space-between;  
+    align-items: center;  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);  
+  }  
+  
+  .back-link {  
+    color: #666;  
+    text-decoration: none;  
+    font-size: 15px;  
+    display: flex;  
+    align-items: center;  
+    transition: color 0.3s ease;  
+  }  
+  
+  .back-link:hover {  
+    color: #007bff;  
+  }  
+  
+  .scooter-info-card {  
+    padding: 20px;  
+    background-color: white;  
+    border-bottom: 1px solid #eee;  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);  
+  }  
+  
+  .info-grid {  
+    display: grid;  
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  
+    gap: 20px;  
+    margin-top: 15px;  
+  }  
+  
+  .info-item {  
+    display: flex;  
+    align-items: center;  
+    gap: 10px;  
+    padding: 10px;  
+    background-color: #f8f9fa;  
+    border-radius: 8px;  
+    transition: all 0.3s ease;  
+  }  
+  
+  .info-item:hover {  
+    background-color: #e9ecef;  
+  }  
+  
+  .info-icon {  
+    font-size: 1.2rem;  
+  }  
+  
+  .info-icon.location {  
+    color: #0d6efd;  
+  }  
+  
+  .info-icon.battery-high {  
+    color: #198754;  
+  }  
+  
+  .info-icon.battery-medium {  
+    color: #ffc107;  
+  }  
+  
+  .info-icon.battery-low {  
+    color: #dc3545;  
+  }  
+  
+  .status-icon {  
+    font-size: 1.2rem;  
+  }  
+  
+  .status-icon.rented {  
+    color: #ffc107;  
+  }  
+  
+  .status-icon.maintenance {  
+    color: #dc3545;  
+  }  
+  
+  .status-icon.offline {  
+    color: #6c757d;  
+  }  
+  
+  .map-container {  
+    flex: 1;  
+    position: relative;  
+    border-top: 1px solid #eee;  
+  }  
+  
+  .loading-container {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    gap: 20px;  
+  }  
+  
+  .error-container {  
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    height: 100vh;  
+    gap: 20px;  
+    text-align: center;  
+    padding: 20px;  
+  }  
+  
+  @media (max-width: 768px) {  
+    .info-grid {  
+      grid-template-columns: 1fr;  
+    }  
+    
+    .scooter-info-card {  
+      padding: 15px;  
+    }  
+    
+    .details-header {  
+      padding: 10px 15px;  
+    }  
+  }

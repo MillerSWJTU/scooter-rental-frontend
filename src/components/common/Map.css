@@ -1,0 +1,206 @@
+/* 主地图容器 */  
+.map-container {  
+  position: relative;  
+  border-radius: 8px;  
+  overflow: hidden;  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  
+}  
+
+/* 加载和错误覆盖层 */  
+.map-loading-overlay,  
+.map-error-overlay {  
+  position: absolute;  
+  top: 0;  
+  left: 0;  
+  width: 100%;  
+  height: 100%;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  background-color: rgba(255, 255, 255, 0.8);  
+  z-index: 1000;  
+  border-radius: 8px;  
+}  
+
+/* 地图控制按钮组 */  
+.map-controls {  
+  position: absolute;  
+  top: 10px;  
+  right: 10px;  
+  z-index: 1000;  
+  display: flex;  
+  flex-direction: column;  
+  gap: 8px;  
+}  
+
+.map-control-btn {  
+  width: 40px;  
+  height: 40px;  
+  border-radius: 8px !important;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  
+  transition: all 0.2s ease;  
+}  
+
+.map-control-btn:hover {  
+  transform: translateY(-2px);  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);  
+}  
+
+/* 车辆数量显示 */  
+.scooter-count {  
+  position: absolute;  
+  bottom: 20px;  
+  left: 20px;  
+  z-index: 500;  
+}  
+
+/* 弹出窗口样式 */  
+.scooter-popup {  
+  min-width: 250px;  
+  padding: 8px;  
+}  
+
+.scooter-popup-header {  
+  margin-bottom: 12px;  
+}  
+
+.scooter-popup-header h6 {  
+  font-weight: 600;  
+  margin: 0;  
+  color: #2c3e50;  
+}  
+
+.scooter-popup-details {  
+  margin-bottom: 12px;  
+}  
+
+.detail-item {  
+  display: flex;  
+  align-items: center;  
+  margin-bottom: 8px;  
+  color: #666;  
+  font-size: 0.9em;  
+}  
+
+.detail-icon {  
+  margin-right: 8px;  
+  color: #3498db;  
+}  
+
+.scooter-popup-footer {  
+  border-top: 1px solid #eee;  
+  padding-top: 12px;  
+}  
+
+.scooter-popup-footer small {  
+  color: #7f8c8d;  
+}  
+
+/* Override default Leaflet popup styles */  
+.leaflet-popup-content-wrapper {  
+  border-radius: 8px;  
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);  
+}  
+
+.leaflet-popup-content {  
+  margin: 8px;  
+  line-height: 1.4;  
+}  
+
+.leaflet-popup-tip-container {  
+  margin-top: -1px;  
+}  
+
+/* Filter panel styles */  
+.offcanvas {  
+  border-radius: 16px 0 0 16px;  
+}  
+
+.offcanvas-header {  
+  background-color: #f8f9fa;  
+  border-bottom: 1px solid #eee;  
+}  
+
+.form-range {  
+  height: 6px;  
+  border-radius: 3px;  
+}  
+
+.form-range::-webkit-slider-thumb {  
+  width: 18px;  
+  height: 18px;  
+  margin-top: -6px;  
+  background-color: #3498db;  
+  border: 2px solid #fff;  
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);  
+}  
+
+.form-check-input:checked {  
+  background-color: #3498db;  
+  border-color: #3498db;  
+}  
+
+/* Badge styles */  
+.badge {  
+  padding: 6px 10px;  
+  font-weight: 500;  
+  border-radius: 4px;  
+}  
+
+/* Button styles */  
+.btn-primary {  
+  background-color: #3498db;  
+  border-color: #3498db;  
+  transition: all 0.2s ease;  
+}  
+
+.btn-primary:hover {  
+  background-color: #2980b9;  
+  border-color: #2980b9;  
+  transform: translateY(-1px);  
+}  
+
+.btn-primary:disabled {  
+  background-color: #bdc3c7;  
+  border-color: #bdc3c7;  
+}  
+
+/* 响应式调整 */  
+@media (max-width: 576px) {  
+  .scooter-popup {  
+    min-width: 200px;  
+  }  
+  
+  .map-controls {  
+    top: auto;  
+    bottom: 20px;  
+    right: 20px;  
+  }  
+}
+
+.map-loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+.map-error-message {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #dc3545;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}

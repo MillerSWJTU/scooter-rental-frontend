@@ -1,0 +1,237 @@
+/* RentalForm.css */  
+.rental-form-container {  
+    margin-bottom: 2rem;  
+  }  
+  
+  .back-button {  
+    display: inline-flex;  
+    align-items: center;  
+    padding: 0.5rem 1rem;  
+    color: #495057;  
+    text-decoration: none;  
+    font-weight: 500;  
+    border-radius: 8px;  
+    transition: all 0.3s ease;  
+    border: 1px solid transparent;  
+    margin-bottom: 1.5rem;  
+  }  
+  
+  .back-button:hover {  
+    color: #0d6efd;  
+    background-color: #f8f9fa;  
+    border-color: #dee2e6;  
+    transform: translateX(-5px);  
+  }  
+  
+  .back-button svg {  
+    margin-right: 0.5rem;  
+    font-size: 1.1rem;  
+    transition: transform 0.3s ease;  
+  }  
+  
+  .back-button:hover svg {  
+    transform: translateX(-3px);  
+  }  
+  
+  .rental-plans {  
+    display: grid;  
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));  
+    gap: 1rem;  
+    margin-bottom: 1rem;  
+  }  
+  
+  .rental-plan-card {  
+    border: 2px solid #e9ecef;  
+    border-radius: 12px;  
+    padding: 1.25rem;  
+    cursor: pointer;  
+    transition: all 0.3s ease;  
+    background-color: #fff;  
+    position: relative;  
+    overflow: hidden;  
+  }  
+  
+  .rental-plan-card:hover {  
+    transform: translateY(-2px);  
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  
+    border-color: #dee2e6;  
+  }  
+  
+  .rental-plan-card.selected {  
+    border-color: #0d6efd;  
+    background-color: #f8f9ff;  
+  }  
+  
+  .rental-plan-card .plan-icon {  
+    font-size: 1.5rem;  
+    color: #0d6efd;  
+    margin-bottom: 1rem;  
+    display: flex;  
+    align-items: center;  
+    gap: 0.5rem;  
+  }  
+  
+  .rental-plan-card .plan-info h5 {  
+    margin: 0;  
+    font-size: 1.1rem;  
+    font-weight: 600;  
+    color: #212529;  
+  }  
+  
+  .rental-plan-card .plan-info .price {  
+    font-size: 1.25rem;  
+    font-weight: 600;  
+    color: #0d6efd;  
+    margin: 0.5rem 0;  
+  }  
+  
+  .rental-plan-card .plan-info .description {  
+    font-size: 0.9rem;  
+    color: #6c757d;  
+    margin: 0;  
+  }  
+  
+  .duration-input {  
+    font-size: 1.1rem;  
+    padding: 0.75rem;  
+    border-radius: 8px;  
+  }  
+  
+  .total-price {  
+    background-color: #f8f9fa;  
+    padding: 1rem;  
+    border-radius: 8px;  
+    border: 1px solid #dee2e6;  
+  }  
+  
+  .total-price .price {  
+    font-size: 1.5rem;  
+    font-weight: 600;  
+    color: #0d6efd;  
+  }  
+  
+  .notes-input {  
+    border-radius: 8px;  
+    resize: none;  
+  }  
+  
+  .submit-button {  
+    padding: 1rem;  
+    font-size: 1.1rem;  
+    border-radius: 8px;  
+  }  
+  
+  /* 响应式调整 */  
+  @media (max-width: 768px) {  
+    .rental-plans {  
+      grid-template-columns: 1fr;  
+    }  
+    
+    .rental-plan-card {  
+      padding: 1rem;  
+    }  
+    
+    .rental-plan-card .plan-info .price {  
+      font-size: 1.1rem;  
+    }  
+    
+    .total-price .price {  
+      font-size: 1.25rem;  
+    }  
+  }  
+  
+  /* 动画效果 */  
+  .rental-plan-card {  
+    position: relative;  
+  }  
+  
+  .rental-plan-card::after {  
+    content: '';  
+    position: absolute;  
+    top: 0;  
+    left: 0;  
+    width: 100%;  
+    height: 100%;  
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);  
+    transform: translateX(-100%);  
+    transition: transform 0.6s;  
+  }  
+  
+  .rental-plan-card:hover::after {  
+    transform: translateX(100%);  
+  }  
+  
+  .rental-plan-card.selected::before {  
+    content: '';  
+    position: absolute;  
+    top: 0;  
+    right: 0;  
+    width: 0;  
+    height: 0;  
+    border-style: solid;  
+    border-width: 0 2rem 2rem 0;  
+    border-color: transparent #0d6efd transparent transparent;  
+  }  
+  
+  .rental-summary {  
+    background-color: #f8f9fa;  
+    padding: 15px;  
+    border-radius: 8px;  
+    margin-bottom: 20px;  
+  }  
+  
+  .rental-terms {  
+    border: 1px solid #dee2e6;  
+    padding: 15px;  
+    border-radius: 8px;  
+  }  
+  
+  .rental-terms ul {  
+    padding-left: 20px;  
+    margin-bottom: 15px;  
+  }  
+  
+  .discount-badge {  
+    text-align: center;  
+  }  
+  
+  .booking-confirmation {  
+    text-align: center;  
+  }  
+  
+  .booking-details {  
+    padding: 15px;  
+    background-color: #f8f9fa;  
+    border-radius: 8px;  
+    margin-bottom: 20px;  
+    text-align: left;  
+  }  
+  
+  .unlock-instructions {  
+    text-align: left;  
+  }  
+  
+  .unlock-instructions ol {  
+    padding-left: 20px;  
+  }  
+  
+  .confirm-details {  
+    background-color: #f8f9fa;  
+    padding: 15px;  
+    border-radius: 8px;  
+  }  
+  
+  .payment-confirm {  
+    background-color: #f8f9fa;  
+    padding: 15px;  
+    border-radius: 8px;  
+  }  
+  
+  .payment-method-title {  
+    font-size: 0.9rem;  
+    color: #6c757d;  
+  }  
+  
+  .payment-method-details {  
+    font-weight: 500;  
+  }

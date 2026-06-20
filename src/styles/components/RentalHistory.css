@@ -1,0 +1,59 @@
+.rental-history-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.rental-history-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.rental-history-card .card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.rental-history-card .card-body {
+  padding: 1.5rem;
+}
+
+.rental-history-card .rental-details {
+  color: #333;
+}
+
+.rental-history-card .rental-details strong {
+  color: #666;
+  font-weight: 600;
+}
+
+.rental-history-card .rental-details .text-primary {
+  color: #4e73df !important;
+}
+
+.rental-history-card .rental-details .text-success {
+  color: #1cc88a !important;
+}
+
+.rental-history-card .rental-details .text-info {
+  color: #36b9cc !important;
+}
+
+.rental-history-card .rental-details .text-warning {
+  color: #f6c23e !important;
+}
+
+.rental-history-card .rental-details .text-secondary {
+  color: #858796 !important;
+}
+
+.rental-history-card .border-top {
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.rental-history-card .badge {
+  font-size: 0.8rem;
+  padding: 0.5em 0.8em;
+  border-radius: 50px;
+} 

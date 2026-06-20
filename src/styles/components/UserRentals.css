@@ -1,0 +1,83 @@
+/* UserRentals.css */  
+.user-rentals-container {  
+    margin-bottom: 2rem;  
+  }  
+  
+  .rental-card {  
+    height: 100%;  
+    border: none;  
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  
+    transition: all 0.3s;  
+  }  
+  
+  .rental-card:hover {  
+    transform: translateY(-5px);  
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);  
+  }  
+  
+  .scooter-model {  
+    font-size: 1.1rem;  
+    font-weight: 500;  
+  }  
+  
+  .scooter-id {  
+    font-size: 0.8rem;  
+    color: #6c757d;  
+  }  
+  
+  .rental-details .list-group-item {  
+    border: none;  
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);  
+    padding: 10px 0;  
+  }  
+  
+  .rental-details .list-group-item:last-child {  
+    border-bottom: none;  
+  }  
+  
+  .qr-code-container {  
+    display: inline-block;  
+    background: #fff;  
+    padding: 15px;  
+    border-radius: 8px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+  }  
+  
+  .scooter-unlock-details {  
+    background-color: #f8f9fa;  
+    padding: 15px;  
+    border-radius: 8px;  
+  }  
+  
+  .rental-return-summary {  
+    background-color: #f8f9fa;  
+    padding: 15px;  
+    border-radius: 8px;  
+  }  
+  
+  .star-rating {  
+    display: flex;  
+    justify-content: center;  
+    font-size: 2rem;  
+  }  
+  
+  .star-rating-item {  
+    cursor: pointer;  
+    color: #ccc;  
+    margin: 0 5px;  
+  }  
+  
+  .star-rating-item.active {  
+    color: #ffc107;  
+  }  
+  
+  .rating-text {  
+    font-size: 0.9rem;  
+    color: #6c757d;  
+  }  
+  
+  .review-text {  
+    font-style: italic;  
+    color: #6c757d;  
+    font-size: 0.9rem;  
+  }

@@ -1,0 +1,146 @@
+/* ScooterItem.css */  
+.scooter-item {  
+    transition: all 0.3s ease;  
+    border-radius: 12px;  
+    overflow: hidden;  
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  
+    height: 100%;  
+    display: flex;  
+    flex-direction: column;  
+  }  
+  
+  .scooter-item:hover {  
+    transform: translateY(-5px);  
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);  
+  }  
+  
+  .scooter-item.unavailable {  
+    opacity: 0.85;  
+  }  
+  
+  .scooter-image {  
+    position: relative;  
+    height: 180px;  
+    overflow: hidden;  
+  }  
+  
+  .scooter-image img {  
+    width: 100%;  
+    height: 100%;  
+    object-fit: cover;  
+    transition: transform 0.5s ease;  
+  }  
+  
+  .scooter-item:hover .scooter-image img {  
+    transform: scale(1.05);  
+  }  
+  
+  .scooter-status {  
+    position: absolute;  
+    top: 10px;  
+    right: 10px;  
+    z-index: 2;  
+  }  
+  
+  .status-icon {  
+    position: absolute;  
+    bottom: 10px;  
+    right: 10px;  
+    font-size: 1.5rem;  
+    z-index: 2;  
+    padding: 8px;  
+    border-radius: 50%;  
+    background-color: rgba(255, 255, 255, 0.9);  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  
+  }  
+  
+  .status-icon.rented {  
+    color: #ffc107;  
+  }  
+  
+  .status-icon.maintenance {  
+    color: #dc3545;  
+  }  
+  
+  .status-icon.offline {  
+    color: #6c757d;  
+  }  
+  
+  .scooter-id {  
+    font-size: 0.8rem;  
+    color: #6c757d;  
+    font-weight: 500;  
+  }  
+  
+  .scooter-location {  
+    display: flex;  
+    align-items: center;  
+    font-size: 0.9rem;  
+    color: #495057;  
+  }  
+  
+  .location-icon {  
+    color: #0d6efd;  
+    margin-right: 5px;  
+  }  
+  
+  .distance {  
+    margin-left: 5px;  
+    color: #6c757d;  
+  }  
+  
+  .battery-info {  
+    margin-bottom: 15px;  
+  }  
+  
+  .battery-label {  
+    font-size: 0.9rem;  
+    color: #495057;  
+  }  
+  
+  .battery-percentage {  
+    font-size: 0.9rem;  
+    font-weight: 500;  
+  }  
+  
+  .pricing-info {  
+    background-color: #f8f9fa;  
+    padding: 10px;  
+    border-radius: 8px;  
+    margin-top: 10px;  
+  }  
+  
+  .pricing-row {  
+    margin-bottom: 5px;  
+    font-size: 0.9rem;  
+  }  
+  
+  .price-label {  
+    color: #495057;  
+  }  
+  
+  .price-value {  
+    font-weight: 500;  
+    color: #0d6efd;  
+  }  
+  
+  .card-footer {  
+    background-color: transparent;  
+    border-top: 1px solid rgba(0, 0, 0, 0.05);  
+    padding: 15px;  
+  }  
+  
+  /* 响应式调整 */  
+  @media (max-width: 768px) {  
+    .scooter-image {  
+      height: 150px;  
+    }  
+    
+    .pricing-info {  
+      padding: 8px;  
+    }  
+    
+    .pricing-row {  
+      font-size: 0.8rem;  
+    }  
+  }
