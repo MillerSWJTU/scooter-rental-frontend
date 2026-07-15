@@ -63,9 +63,9 @@ const PersonalCard = () => {
   const handleVerifyDiscount = async () => {
     setVerifying(true);
     try {
-      await api.post('/api/users/verify-discount');
+      await api.post('/users/verify-discount');
       // 重新获取用户信息
-      const res = await api.get(`/api/users/${currentUser.username}`);
+      const res = await api.get(`/users/${currentUser.username}`);
       // 使用 AuthContext 中的 updateUser 方法更新用户信息
       updateUser(res.data);
       setVerifySuccess(true);

@@ -36,11 +36,8 @@ const PaymentResult = () => {
             // 支付成功
           }
         } 
-        // 如果有交易ID和状态，处理回调
+        // 支付回调：直接展示 URL 参数中的交易信息
         else if (transactionId && status) {
-          // 处理支付回调
-          const result = paymentService.processPaymentCallback(transactionId, status);
-          // 在真实场景中，这里应该等待服务器响应，然后更新UI
           setPayment({
             id: 0,
             transactionId,
@@ -49,11 +46,6 @@ const PaymentResult = () => {
             rentalId: rentalId ? Number(rentalId) : null,
             createdAt: new Date().toISOString()
           });
-          
-          // 如果支付成功且有租赁ID，更新支付状态
-          if (status === 'COMPLETED') {
-            // 支付成功
-          }
         } else {
           setError('无效的支付查询');
         }
