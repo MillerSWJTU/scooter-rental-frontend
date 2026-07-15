@@ -5,7 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';  
 import { FaLocationArrow, FaFilter, FaBatteryThreeQuarters, FaTimesCircle, FaMapMarkerAlt, FaClock, FaYenSign } from 'react-icons/fa';  
 import { useNavigate } from 'react-router-dom';  
-import './Map.css';  
+import '../../styles/components/Map.css';  
 import ScooterService from '../../services/scooter.service';
 
 // Fix Leaflet icon issue  

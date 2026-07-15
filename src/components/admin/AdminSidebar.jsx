@@ -7,7 +7,7 @@ import {
   FaBiking, 
   FaCommentAlt
 } from 'react-icons/fa';
-import './AdminSidebar.css';
+import '../../styles/components/AdminSidebar.css';
 
 const AdminSidebar = () => {
   const location = useLocation();
