@@ -44,7 +44,7 @@ const ScooterManagement = () => {
     const fetchScooters = async () => {  
       try {  
         setIsLoading(true);  
-        const response = await scooterService.getScooterStats();  // 使用统计接口
+        const response = await scooterService.getAllScooters();
         console.log('Fetched scooters raw response:', response); // Log raw response
         
         // 确保响应是数组
@@ -207,7 +207,7 @@ const ScooterManagement = () => {
         location: '',  
         latitude: '',  
         longitude: '',  
-        manufactureDate: ''  
+        batteryLevel: 100
       });  
       setValidated(false);  
     } catch (error) {  
@@ -282,7 +282,7 @@ const ScooterManagement = () => {
   // 更新滑板车状态  
   const handleStatusChange = async (scooter, newStatus) => {  
     try {  
-      const updatedScooter = await scooterService.updateScooterStatus(scooter.id, newStatus);  
+      const updatedScooter = await scooterService.updateScooter(scooter.id, { status: newStatus });  
       
       const updatedScooters = scooters.map(s => {  
         if (s.id === scooter.id) {  
@@ -322,7 +322,7 @@ const ScooterManagement = () => {
       location: scooter.location || '',  
       latitude: scooter.latitude || '',  
       longitude: scooter.longitude || '',  
-      manufactureDate: scooter.manufactureDate  
+      pricePerFourHours: scooter.pricePerFourHours  
     });  
     setShowEditModal(true);  
   };  

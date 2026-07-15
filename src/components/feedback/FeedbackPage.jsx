@@ -8,6 +8,7 @@ const FeedbackPage = () => {
   const { currentUser } = useAuth();
   const [activeTab, setActiveTab] = useState('list');
   const [message, setMessage] = useState('');
+  const [refreshKey, setRefreshKey] = useState(0);
 
   if (!currentUser) {
     return (
@@ -37,11 +38,12 @@ const FeedbackPage = () => {
                 className="mb-3"
               >
                 <Tab eventKey="list" title="My Feedback">
-                  <FeedbackList />
+                  <FeedbackList key={refreshKey} />
                 </Tab>
                 <Tab eventKey="new" title="Submit Feedback">
                   <FeedbackForm onSuccess={() => {
                     setMessage('Feedback submitted successfully!');
+                    setRefreshKey(k => k + 1);
                     setActiveTab('list');
                   }} />
                 </Tab>

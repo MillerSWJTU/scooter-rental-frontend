@@ -1,4 +1,4 @@
-import api, { setAuthToken, setRefreshToken } from './api';
+import api, { setAuthToken } from './api';
 import { AUTH_CONFIG, API_ENDPOINTS } from '../config';
 
 const authService = {  
@@ -18,21 +18,15 @@ const authService = {
       
       // 检查响应中是否包含必要的用户信息
       if (response.data && response.data.token) {
-        // 存储token和refresh token
         setAuthToken(response.data.token);
-        if (response.data.refreshToken) {
-          setRefreshToken(response.data.refreshToken);
-        }
-        
-        // 确保用户信息包含必要的字段
+
         const userData = {
           id: response.data.id,
           username: response.data.username,
           email: response.data.email,
           phone: response.data.phone,
           role: response.data.role || 'USER',
-          token: response.data.token,
-          refreshToken: response.data.refreshToken
+          token: response.data.token
         };
         
         // 存储用户信息
@@ -141,10 +135,9 @@ const authService = {
     }
   },  
   
-  logout() {  
+  logout() {
     localStorage.removeItem('user');
     setAuthToken(null);
-    setRefreshToken(null);
   },  
   
   getCurrentUser() {  
@@ -166,57 +159,6 @@ const authService = {
     return user ? user.role : null;
   },
 
-  // 验证token是否有效
-  async validateToken(token) {
-    try {
-      if (!token) {
-        console.warn('No token provided for validation');
-        return false;
-      }
-      
-      const response = await api.get(API_ENDPOINTS.AUTH.VALIDATE, {
-        headers: {
-          Authorization: `${AUTH_CONFIG.TOKEN_TYPE} ${token}`
-        },
-        // 缩短此请求的超时时间，防止长时间阻塞
-        timeout: 5000
-      });
-      
-      return response.data === true;
-    } catch (error) {
-      console.error('Token validation error:', error);
-      // 如果是网络错误或服务器暂时不可用，我们返回true，保持用户会话
-      if (error.code === 'ECONNABORTED' || error.message.includes('timeout') || 
-          !error.response || error.response.status >= 500) {
-        console.warn('Network or server error during token validation, keeping session active');
-        return true;
-      }
-      return false;
-    }
-  },
-
-  // 刷新token
-  async refreshToken() {
-    try {
-      const refreshToken = localStorage.getItem(AUTH_CONFIG.REFRESH_TOKEN_KEY);
-      if (!refreshToken) {
-        throw new Error('No refresh token found');
-      }
-
-      const response = await api.post(API_ENDPOINTS.AUTH.REFRESH_TOKEN, {
-        refreshToken
-      });
-
-      if (response.data && response.data.token) {
-        setAuthToken(response.data.token);
-        return true;
-      }
-      return false;
-    } catch (error) {
-      console.error('Token refresh error:', error);
-      return false;
-    }
-  }
 };  
 
 export default authService;

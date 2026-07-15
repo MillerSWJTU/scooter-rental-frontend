@@ -64,16 +64,6 @@ export const AuthProvider = ({ children }) => {
             
             // 确保token应用到所有API请求中
             setAuthToken(token);
-            
-            // 在后台验证token，但不阻塞用户界面显示
-            authService.validateToken(token).then(isValid => {
-              if (!isValid) {
-                console.warn('Token validation failed, but keeping user session for now');
-                // 注意：这里不强制登出用户，只记录警告
-              }
-            }).catch(err => {
-              console.warn('Token validation error, but keeping user session for now:', err);
-            });
           } catch (parseError) {
             console.error('Failed to parse stored user:', parseError);
             localStorage.removeItem('user');
@@ -120,21 +110,17 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await authService.login(username, password);
       setCurrentUser(response);
-      
-      // 存储用户信息和token
+
       localStorage.setItem('user', JSON.stringify(response));
       localStorage.setItem('token', response.token);
-      if (response.refreshToken) {
-        localStorage.setItem('refreshToken', response.refreshToken);
-      }
-      
+
       // 检查是否有需要重定向的页面
       const redirectPath = sessionStorage.getItem('redirectAfterLogin');
       if (redirectPath) {
         sessionStorage.removeItem('redirectAfterLogin');
         navigate(redirectPath);
       } else {
-        navigate('/dashboard');
+        navigate('/admin/dashboard');
       }
       
       return response;

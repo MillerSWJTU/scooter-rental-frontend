@@ -49,11 +49,6 @@ class ScooterService {
 
   // ==================== 管理端 ====================
 
-  async getScooterStats() {
-    const response = await api.get('/scooters/stats');
-    return response.data;
-  }
-
   async createScooter(scooterData) {
     try {
       if (!scooterData) throw new Error('Missing scooter data');
@@ -115,16 +110,6 @@ class ScooterService {
       await api.delete(`/scooters/${scooterId}`);
     } catch (error) {
       console.error('Error deleting scooter:', error);
-      throw error;
-    }
-  }
-
-  async updateScooterStatus(scooterId, status) {
-    try {
-      const response = await api.put(`/scooters/${scooterId}/status`, { status });
-      return response.data;
-    } catch (error) {
-      console.error('Error updating scooter status:', error);
       throw error;
     }
   }

@@ -10,11 +10,10 @@ import adminService from '../../services/admin.service';
 const Dashboard = () => {  
   const [stats, setStats] = useState({  
     totalUsers: 0,  
-    totalOrders: 0,
+    totalRentals: 0,
     totalRevenue: 0
   });  
   
-  const [userRoles, setUserRoles] = useState([]);  
   const [weeklyRentalIncome, setWeeklyRentalIncome] = useState([]);  
   const [rentalPlanStats, setRentalPlanStats] = useState([]);
   const [combinedDailyIncome, setCombinedDailyIncome] = useState([]);
@@ -34,10 +33,6 @@ const Dashboard = () => {
       try {  
         setIsLoading(true);  
         setError(null);
-        
-        // Fetch user role distribution
-        const roleData = await adminService.getUserRoleDistribution();
-        setUserRoles(roleData);
         
         // Fetch weekly income by rental plan
         const weeklyIncomeData = await adminService.getRevenueWeekly();
@@ -129,7 +124,7 @@ const Dashboard = () => {
               <div className="d-flex justify-content-between align-items-center">  
                 <div>  
                   <h6 className="text-muted mb-2">Total Orders</h6>  
-                  <h3 className="mb-0">{stats.totalOrders}</h3>  
+                  <h3 className="mb-0">{stats.totalRentals}</h3>  
                 </div>  
                 <div className="icon-bg bg-success-light">  
                   <FaMoneyBillWave className="text-success" size={24} />  
@@ -207,7 +202,7 @@ const Dashboard = () => {
                     labelLine={false}
                     outerRadius={100}
                     fill="#8884d8"
-                    dataKey="value"
+                    dataKey="count"
                     nameKey="plan"
                     label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
                   >

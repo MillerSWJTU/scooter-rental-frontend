@@ -5,6 +5,7 @@ import { useRental } from '../../contexts/RentalContext';
 import { useAuth } from '../../contexts/AuthContext';
 import rentalService from '../../services/rental.service';
 import '../../styles/components/RentalManagement.css';
+import '../../styles/components/RentalHistory.css';
 
 const RentalManagement = () => {
   const { currentUser } = useAuth();

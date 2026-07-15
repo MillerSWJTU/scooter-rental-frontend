@@ -19,17 +19,14 @@ const UserManagement = () => {
     username: '',  
     email: '',  
     phone: '',  
-    role: 'ROLE_USER',  
-    status: 'active',
-    notes: '',
+    role: 'ROLE_USER',
     password: ''
   });  
   const [validated, setValidated] = useState(false);  
   const [isLoading, setIsLoading] = useState(true);  
   const [message, setMessage] = useState({ type: '', text: '' });  
   const [filterOptions, setFilterOptions] = useState({  
-    role: 'all',  
-    status: 'all',  
+    role: 'all',
     dateRange: 'all'  
   });  
   
@@ -42,14 +39,8 @@ const UserManagement = () => {
         
         // Ensure response is an array
         if (Array.isArray(response)) {
-          // Process backend data, add default status if not present
-          const processedUsers = response.map(user => ({
-            ...user,
-            // If backend doesn't return status field, set active as default
-            status: user.status || 'active'
-          }));
-          setUsers(processedUsers);
-          setFilteredUsers(processedUsers);
+          setUsers(response);
+          setFilteredUsers(response);
         } else {
           console.warn('API response (users) is not an array:', response);
           setUsers([]);
@@ -87,13 +78,6 @@ const UserManagement = () => {
     // Role filter
     if (filterOptions.role !== 'all') {
       filtered = filtered.filter(user => user.role === filterOptions.role);
-    }
-
-    // Status filter
-    if (filterOptions.status !== 'all') {
-      filtered = filtered.filter(user => 
-        user.status.toLowerCase() === filterOptions.status.toLowerCase()
-      );
     }
 
     // Date range filter
@@ -143,7 +127,6 @@ const UserManagement = () => {
         email: userForm.email,
         phone: userForm.phone,
         password: userForm.password,
-        role: userForm.role
       };
       const newUser = await userService.createUser(userData);
       
@@ -156,8 +139,7 @@ const UserManagement = () => {
         username: '',  
         email: '',  
         phone: '',  
-        role: 'ROLE_USER',  
-        status: 'active',
+        role: 'ROLE_USER',
         password: ''
       });  
       setValidated(false);  
@@ -351,8 +333,7 @@ const UserManagement = () => {
       email: user.email || '',  
       phone: user.phone || '',  
       role: user.role || 'ROLE_USER',  
-      status: user.status || 'active',
-      notes: user.notes || '',
+      phone: user.phone || '',
       password: ''
     });  
     setShowEditModal(true);  
@@ -376,41 +357,7 @@ const UserManagement = () => {
     }
   };
 
-  // 获取状态显示文本
-  const getStatusDisplay = (status) => {
-    // 检查status是否为空或undefined
-    if (!status) return 'Active'; // 默认状态为活跃
-    
-    switch (status) {
-      case 'active':
-      case 'ACTIVE':
-        return 'Active';
-      case 'inactive':
-      case 'INACTIVE':
-        return 'Inactive';
-      case 'pending':
-      case 'PENDING':
-        return 'Pending';
-      default:
-        return status; // 显示原始状态值，方便调试
-    }
-  };
-
-  // 获取状态对应的样式
-  const getStatusStyle = (status) => {
-    switch (status) {
-      case 'active':
-        return 'success';
-      case 'inactive':
-        return 'danger';
-      case 'pending':
-        return 'warning';
-      default:
-        return 'secondary';
-    }
-  };
-  
-  // 切换排序方向  
+  // 切换排序方向
   const toggleSort = (field) => {  
     if (sortField === field) {  
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');  
@@ -447,19 +394,6 @@ const UserManagement = () => {
         </Form.Select>
       </InputGroup>
 
-      <InputGroup style={{ width: 'auto' }}>
-        <InputGroup.Text>Status</InputGroup.Text>
-        <Form.Select
-          value={filterOptions.status}
-          onChange={(e) => setFilterOptions({ ...filterOptions, status: e.target.value })}
-          style={{ width: 'auto' }}
-        >
-          <option value="all">All Statuses</option>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-          <option value="pending">Pending</option>
-        </Form.Select>
-      </InputGroup>
 
       <InputGroup style={{ width: 'auto' }}>
         <InputGroup.Text>Registration Date</InputGroup.Text>
@@ -481,7 +415,7 @@ const UserManagement = () => {
           setSearchTerm('');
           setFilterOptions({
             role: 'all',
-            status: 'all',
+            searchTerm: '',
             dateRange: 'all'
           });
         }}
@@ -556,32 +490,7 @@ const UserManagement = () => {
                 </Form.Select>
               </Form.Group>
             </Col>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Status</Form.Label>
-                <Form.Select
-                  value={userForm.status}
-                  onChange={(e) => setUserForm({ ...userForm, status: e.target.value })}
-                  required
-                >
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                  <option value="pending">Pending</option>
-                </Form.Select>
-              </Form.Group>
-            </Col>
           </Row>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Notes</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              value={userForm.notes || ''}
-              onChange={(e) => setUserForm({ ...userForm, notes: e.target.value })}
-              placeholder="Add user notes..."
-            />
-          </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowEditModal(false)}>
@@ -678,7 +587,6 @@ const UserManagement = () => {
                   <th style={{ width: '20%' }}>Email</th>
                   <th style={{ width: '15%' }}>Phone</th>
                   <th style={{ width: '10%' }}>Role</th>
-                  <th style={{ width: '10%' }}>Status</th>
                   <th style={{ width: '15%' }}>Registration Date</th>
                   <th style={{ width: '10%' }}>Actions</th>
                 </tr>
@@ -708,11 +616,6 @@ const UserManagement = () => {
                       <td>
                         <Badge bg={user.role === 'ROLE_ADMIN' ? 'danger' : 'info'}>
                           {getRoleDisplay(user.role)}
-                        </Badge>
-                      </td>
-                      <td>
-                        <Badge bg={getStatusStyle(user.status)}>
-                          {getStatusDisplay(user.status)}
                         </Badge>
                       </td>
                       <td>{new Date(user.createdAt).toLocaleString()}</td>
@@ -818,20 +721,6 @@ const UserManagement = () => {
                   >  
                     <option value="ROLE_USER">User</option>  
                     <option value="ROLE_ADMIN">Admin</option>  
-                  </Form.Select>  
-                </Form.Group>  
-              </Col>  
-              <Col md={6}>  
-                <Form.Group className="mb-3">  
-                  <Form.Label>Status</Form.Label>  
-                  <Form.Select  
-                    value={userForm.status}  
-                    onChange={(e) => setUserForm({ ...userForm, status: e.target.value })}  
-                    required  
-                  >  
-                    <option value="active">Active</option>  
-                    <option value="inactive">Inactive</option>  
-                    <option value="pending">Pending</option>  
                   </Form.Select>  
                 </Form.Group>  
               </Col>  

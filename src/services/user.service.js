@@ -54,17 +54,6 @@ const userService = {
       throw error;
     }
   },
-
-  // 切换用户状态
-  toggleUserStatus: async (username, status) => {
-    try {
-      const response = await api.put(`/users/${username}/status`, { status });
-      return response.data;
-    } catch (error) {
-      console.error('Error toggling user status:', error);
-      throw error;
-    }
-  },
 };
 
 export default userService;

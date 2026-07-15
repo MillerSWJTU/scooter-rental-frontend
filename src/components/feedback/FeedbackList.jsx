@@ -33,7 +33,7 @@ const FeedbackList = () => {
       PENDING: 'warning',
       PROCESSING: 'info',
       RESOLVED: 'success',
-      CLOSED: 'secondary'
+      REJECTED: 'danger'
     };
     return <Badge bg={variants[status]}>{status}</Badge>;
   };

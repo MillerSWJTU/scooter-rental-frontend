@@ -72,26 +72,6 @@ export const RentalProvider = ({ children }) => {
     setCurrentRental(rental);
   }, []);
 
-  const startRental = async (scooterId) => {
-    if (!currentUser?.username) {
-      throw new Error('请先登录后再租用滑板车');
-    }
-
-    try {
-      setLoading(true);
-      setError(null);
-      const rental = await rentalService.startRental(scooterId);
-      addRental(rental);
-      await loadUserRentals();
-      return rental;
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const endRental = async (rentalId) => {
     if (!currentUser?.username) {
       throw new Error('请先登录后再操作');
@@ -160,7 +140,6 @@ export const RentalProvider = ({ children }) => {
     rentals,
     loading,
     error,
-    startRental,
     endRental,
     extendRental,
     cancelRental,

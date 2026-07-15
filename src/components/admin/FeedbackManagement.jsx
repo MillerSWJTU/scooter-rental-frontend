@@ -61,11 +61,23 @@ const FeedbackManagement = () => {
     }
   };
 
+  const handleDelete = async (feedbackId) => {
+    if (!window.confirm('Are you sure you want to delete this feedback?')) return;
+    try {
+      await feedbackService.deleteFeedback(feedbackId);
+      fetchFeedbacks();
+    } catch (err) {
+      setError('Failed to delete feedback');
+      console.error('Error deleting feedback:', err);
+    }
+  };
+
   const getStatusBadge = (status) => {
     const variants = {
       PENDING: 'warning',
-      IN_PROGRESS: 'info',
-      RESOLVED: 'success'
+      PROCESSING: 'info',
+      RESOLVED: 'success',
+      REJECTED: 'danger'
     };
     return <Badge bg={variants[status]}>{status}</Badge>;
   };
@@ -117,7 +129,8 @@ const FeedbackManagement = () => {
                 >
                   <option value="ALL">All Status</option>
                   <option value="PENDING">Pending</option>
-                  <option value="IN_PROGRESS">In Progress</option>
+                  <option value="PROCESSING">Processing</option>
+                  <option value="REJECTED">Rejected</option>
                   <option value="RESOLVED">Resolved</option>
                 </Form.Select>
               </Form.Group>
@@ -183,6 +196,13 @@ const FeedbackManagement = () => {
                     disabled={feedback.status === 'RESOLVED'}
                   >
                     Reply
+                  </Button>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => handleDelete(feedback.id)}
+                  >
+                    Delete
                   </Button>
                 </td>
               </tr>
