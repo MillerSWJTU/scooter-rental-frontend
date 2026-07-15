@@ -4,7 +4,6 @@ import { Container, Row, Col, Card, Form, Button, Alert, Spinner } from 'react-b
 import { useAuth } from '../../contexts/AuthContext';
 import paymentService from '../../services/payment.service';
 import rentalService from '../../services/rental.service';
-import walletService from '../../services/wallet.service';
 
 const PaymentForm = () => {
   const { rentalId } = useParams();
@@ -18,7 +17,6 @@ const PaymentForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const [paymentCreated, setPaymentCreated] = useState(false);
   const [paymentData, setPaymentData] = useState(null);
-  const [walletBalance, setWalletBalance] = useState(0);
   
   useEffect(() => {
     const fetchRental = async () => {
@@ -34,26 +32,6 @@ const PaymentForm = () => {
         
         const rentalData = await rentalService.getRentalById(rentalId);
         setRental(rentalData);
-        
-        // 检查是否已支付
-        const savedPaidRentals = localStorage.getItem('paidRentals');
-        let paidRentals = [];
-        if (savedPaidRentals) {
-          try {
-            paidRentals = JSON.parse(savedPaidRentals);
-            if (paidRentals.includes(Number(rentalId))) {
-              setError('This order has already been paid, no need to pay again');
-            }
-          } catch (e) {
-            console.error('Failed to parse paid rental record:', e);
-          }
-        }
-        
-        // 获取钱包余额
-        if (currentUser) {
-          const balance = walletService.getBalance(currentUser.id);
-          setWalletBalance(balance);
-        }
       } catch (err) {
         console.error('Failed to get rental information:', err);
         setError('Failed to get rental information, please try again later');
@@ -77,9 +55,16 @@ const PaymentForm = () => {
       setSubmitting(true);
       setError('');
       
-      // 如果选择钱包支付，直接处理
+      // 如果选择钱包支付，通过后端处理
       if (paymentMethod === 'WALLET') {
-        handleWalletPayment();
+        const payment = await paymentService.createPaymentForRental(
+          rentalId,
+          rental.totalCost,
+          'WALLET',
+          currentUser.email
+        );
+        setPaymentCreated(true);
+        setPaymentData(payment);
         return;
       }
       
@@ -102,36 +87,6 @@ const PaymentForm = () => {
     }
   };
   
-  const handleWalletPayment = async () => {
-    try {
-      if (walletBalance < rental.totalCost) {
-        setError('Wallet balance is insufficient, please recharge or choose another payment method');
-        setSubmitting(false);
-        return;
-      }
-      
-      // 使用钱包支付
-      walletService.payForRental(
-        currentUser.id, 
-        Number(rentalId), 
-        rental.totalCost, 
-        `Pay for rental #${rentalId}: ${rental.scooter?.model || '滑板车'}`
-      );
-      
-      // 更新本地支付状态
-      updatePaidRentals(Number(rentalId));
-      
-      // 支付成功，跳转到租赁历史页面
-      navigate('/rentals', { 
-        state: { message: 'Wallet payment successful!', type: 'success' } 
-      });
-    } catch (err) {
-      console.error('Wallet payment failed:', err);
-      setError(err.message || 'Wallet payment failed, please try again later');
-      setSubmitting(false);
-    }
-  };
-  
   const handleSimulatePayment = async (success) => {
     if (!paymentData || !paymentData.id) {
       setError('Invalid payment information');
@@ -146,9 +101,6 @@ const PaymentForm = () => {
       const updatedPayment = await paymentService.simulatePayment(paymentData.id, success);
       
       if (success) {
-        // 更新本地支付状态
-        updatePaidRentals(Number(rentalId));
-        
         // 支付成功，跳转到租赁管理页面
         navigate('/rentals', { 
           state: { message: 'Payment successful!', type: 'success' } 
@@ -164,25 +116,6 @@ const PaymentForm = () => {
       setError('Failed to process payment, please try again later');
     } finally {
       setSubmitting(false);
-    }
-  };
-  
-  // 更新已支付租赁记录
-  const updatePaidRentals = (id) => {
-    try {
-      const savedPaidRentals = localStorage.getItem('paidRentals');
-      let paidRentals = [];
-      
-      if (savedPaidRentals) {
-        paidRentals = JSON.parse(savedPaidRentals);
-      }
-      
-      if (!paidRentals.includes(id)) {
-        paidRentals.push(id);
-        localStorage.setItem('paidRentals', JSON.stringify(paidRentals));
-      }
-    } catch (e) {
-      console.error('Failed to update paid rental record:', e);
     }
   };
   
@@ -285,7 +218,7 @@ const PaymentForm = () => {
                         variant="success" 
                         type="submit" 
                         size="lg"
-                        disabled={submitting || (paymentMethod === 'WALLET' && walletBalance < rental.totalCost)}
+                        disabled={submitting}
                       >
                         {submitting ? <Spinner animation="border" size="sm" /> : null}
                         {' '}Confirm Payment

@@ -27,11 +27,11 @@ const RentalManagement = () => {
   }, [currentUser, loadUserRentals]);
 
   useEffect(() => {
-    const active = rentals.find(rental => rental.active);
+    const active = rentals.find(rental => rental.status === 'ACTIVE');
     setCurrentRental(active);
-    
+
     const recent = rentals
-      .filter(rental => !rental.active)
+      .filter(rental => rental.status !== 'ACTIVE')
       .sort((a, b) => new Date(b.startTime) - new Date(a.startTime))
       .slice(0, 3);
     setRecentRentals(recent);
@@ -103,11 +103,6 @@ const RentalManagement = () => {
       }
       const updatedRental = await rentalService.endRental(currentRental.id);
       if (updatedRental) {
-        // 清除本地存储的支付状态
-        const paidRentals = JSON.parse(localStorage.getItem('paidRentals') || '[]');
-        const updatedPaidRentals = paidRentals.filter(id => id !== currentRental.id);
-        localStorage.setItem('paidRentals', JSON.stringify(updatedPaidRentals));
-        
         setShowEndModal(false);
         resetState();
         handleRentalUpdate();
@@ -349,7 +344,7 @@ const RentalManagement = () => {
                     resetState();
                     setShowExtendModal(true);
                   }}
-                  disabled={!currentRental?.active || processing}
+                  disabled={currentRental?.status !== 'ACTIVE' || processing}
                 >
                   <FaClock className="me-2" />
                   Extend Rental
@@ -360,7 +355,7 @@ const RentalManagement = () => {
                     resetState();
                     setShowEndModal(true);
                   }}
-                  disabled={!currentRental?.active || processing}
+                  disabled={currentRental?.status !== 'ACTIVE' || processing}
                 >
                   <FaStop className="me-2" />
                   End Rental
@@ -371,7 +366,7 @@ const RentalManagement = () => {
                     resetState();
                     setShowCancelModal(true);
                   }}
-                  disabled={!currentRental?.active || processing}
+                  disabled={currentRental?.status !== 'ACTIVE' || processing}
                 >
                   <FaBan className="me-2" />
                   Cancel Rental

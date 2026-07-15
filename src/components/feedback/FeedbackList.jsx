@@ -3,7 +3,7 @@ import { Table, Container, Spinner, Alert, Badge } from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext';
 import feedbackService from '../../services/feedback.service';
 
-const FeedbackList = ({ onMessage }) => {
+const FeedbackList = () => {
   const { currentUser } = useAuth();
   const [feedbacks, setFeedbacks] = useState([]);
   const [loading, setLoading] = useState(true);

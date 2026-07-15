@@ -5,10 +5,9 @@ import {
   OverlayTrigger, Tooltip  
 } from 'react-bootstrap';  
 import {   
-  FaSave, FaUndo, FaPlus, FaTrash, FaInfoCircle,   
-  FaHistory, FaPercentage, FaClock, FaMapMarkedAlt,  
-  FaUserTag, FaCalendarAlt, FaExclamationTriangle,  
-  FaCheck  
+  FaSave, FaUndo, FaPlus, FaTrash, FaInfoCircle,
+  FaHistory, FaPercentage, FaClock, FaMapMarkedAlt,
+  FaUserTag, FaCalendarAlt, FaExclamationTriangle
 } from 'react-icons/fa';  
 
 const PricingSettings = () => {  

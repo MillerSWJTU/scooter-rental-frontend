@@ -56,6 +56,7 @@ const refreshTokenRequest = async () => {
     localStorage.setItem(AUTH_CONFIG.TOKEN_KEY, token);
     return token;
   } catch (error) {
+    console.error('Token refresh failed:', error);
     throw error;
   }
 };

@@ -131,7 +131,7 @@ const RentalActions = ({ rental, onUpdate }) => {
             resetState();
             setShowExtendModal(true);
           }}
-          disabled={!rental?.active || processing}
+          disabled={rental?.status !== 'ACTIVE' || processing}
         >
           <FaClock className="me-2" />
           延长租赁时间
@@ -142,7 +142,7 @@ const RentalActions = ({ rental, onUpdate }) => {
             resetState();
             setShowEndModal(true);
           }}
-          disabled={!rental?.active || processing}
+          disabled={rental?.status !== 'ACTIVE' || processing}
         >
           <FaStop className="me-2" />
           结束租赁
@@ -153,7 +153,7 @@ const RentalActions = ({ rental, onUpdate }) => {
             resetState();
             setShowCancelModal(true);
           }}
-          disabled={!rental?.active || processing}
+          disabled={rental?.status !== 'ACTIVE' || processing}
         >
           <FaBan className="me-2" />
           取消租赁

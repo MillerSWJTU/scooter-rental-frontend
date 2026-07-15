@@ -1,12 +1,10 @@
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API_URL || 'http://110.40.158.203:8080/api';
+import api from './api';
 
 const feedbackService = {
   // 创建反馈
   createFeedback: async (feedbackData) => {
     try {
-      const response = await axios.post(`${API_URL}/feedback`, feedbackData);
+      const response = await api.post('/feedback', feedbackData);
       return response.data;
     } catch (error) {
       console.error('创建反馈失败:', error);
@@ -14,10 +12,21 @@ const feedbackService = {
     }
   },
 
+  // 获取所有反馈（管理端）
+  getAllFeedbacks: async () => {
+    try {
+      const response = await api.get('/feedback');
+      return response.data;
+    } catch (error) {
+      console.error('获取反馈列表失败:', error);
+      throw error;
+    }
+  },
+
   // 获取用户的所有反馈
   getUserFeedbacks: async (username) => {
     try {
-      const response = await axios.get(`${API_URL}/feedback/user/${username}`);
+      const response = await api.get(`/feedback/user/${username}`);
       return response.data;
     } catch (error) {
       console.error('获取用户反馈失败:', error);
@@ -28,7 +37,7 @@ const feedbackService = {
   // 获取特定反馈
   getFeedbackById: async (feedbackId) => {
     try {
-      const response = await axios.get(`${API_URL}/feedback/${feedbackId}`);
+      const response = await api.get(`/feedback/${feedbackId}`);
       return response.data;
     } catch (error) {
       console.error('获取反馈详情失败:', error);
@@ -39,7 +48,7 @@ const feedbackService = {
   // 更新反馈状态
   updateFeedbackStatus: async (feedbackId, status) => {
     try {
-      const response = await axios.put(`${API_URL}/feedback/${feedbackId}/status`, null, {
+      const response = await api.put(`/feedback/${feedbackId}/status`, null, {
         params: { status }
       });
       return response.data;
@@ -49,15 +58,15 @@ const feedbackService = {
     }
   },
 
-  // 添加管理员回复
-  addAdminResponse: async (feedbackId, response) => {
+  // 管理员回复反馈
+  updateFeedback: async (feedbackId, feedbackData) => {
     try {
-      const response = await axios.put(`${API_URL}/feedback/${feedbackId}/response`, null, {
-        params: { response }
+      const response = await api.put(`/feedback/${feedbackId}/response`, null, {
+        params: { response: feedbackData.adminResponse }
       });
       return response.data;
     } catch (error) {
-      console.error('添加管理员回复失败:', error);
+      console.error('回复反馈失败:', error);
       throw error;
     }
   },
@@ -65,7 +74,7 @@ const feedbackService = {
   // 删除反馈
   deleteFeedback: async (feedbackId) => {
     try {
-      await axios.delete(`${API_URL}/feedback/${feedbackId}`);
+      await api.delete(`/feedback/${feedbackId}`);
     } catch (error) {
       console.error('删除反馈失败:', error);
       throw error;
@@ -73,4 +82,4 @@ const feedbackService = {
   }
 };
 
-export default feedbackService; 
+export default feedbackService;

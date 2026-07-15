@@ -5,8 +5,8 @@ import {
   Alert, Spinner, OverlayTrigger, Tooltip, Pagination
 } from 'react-bootstrap';
 import { 
-  FaSearch, FaFilter, FaSort, FaPlus, FaEye, FaPencilAlt,
-  FaTrash, FaCheck, FaTimes, FaExclamationTriangle, FaBell,
+  FaSearch, FaFilter, FaPlus, FaEye, FaPencilAlt,
+  FaTrash, FaCheck, FaTimes, FaExclamationTriangle,
   FaUser, FaClock, FaMotorcycle, FaTools, FaMapMarkerAlt,
   FaArrowUp, FaArrowDown, FaSync, FaExclamationCircle,
   FaClipboardList, FaCamera, FaComments, FaCalendarAlt, FaInfo

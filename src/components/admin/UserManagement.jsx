@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';  
-import { Container, Row, Col, Card, Table, Form, Button, InputGroup, Modal, Badge, Pagination, Alert } from 'react-bootstrap';  
-import { FaSearch, FaUserPlus, FaEdit, FaBan, FaTrash, FaCheckCircle, FaExclamationTriangle, FaFileExport, FaSortAmountDown, FaSortAmountUp, FaUserAlt } from 'react-icons/fa';  
-import adminService from '../../services/admin.service';  
+import { Container, Row, Col, Card, Table, Form, Button, InputGroup, Modal, Badge, Alert } from 'react-bootstrap';
+import { FaSearch, FaUserPlus, FaEdit, FaTrash, FaExclamationTriangle } from 'react-icons/fa';  
+import userService from '../../services/user.service';  
 
 const UserManagement = () => {  
   const [users, setUsers] = useState([]);  
@@ -38,7 +38,7 @@ const UserManagement = () => {
     const fetchUsers = async () => {  
       try {  
         setIsLoading(true);  
-        const response = await adminService.getUsers();
+        const response = await userService.getAllUsers();
         
         // Ensure response is an array
         if (Array.isArray(response)) {
@@ -145,7 +145,7 @@ const UserManagement = () => {
         password: userForm.password,
         role: userForm.role
       };
-      const newUser = await adminService.createUser(userData);
+      const newUser = await userService.createUser(userData);
       
       setUsers([newUser, ...users]);  
       setShowAddModal(false);  
@@ -190,7 +190,7 @@ const UserManagement = () => {
         ...(userForm.password ? { password: userForm.password } : {})
       };
 
-      const updatedUser = await adminService.updateUser(selectedUser.username, userData);
+      const updatedUser = await userService.updateUser(selectedUser.username, userData);
       
       const updatedUsers = users.map(user => {  
         if (user.username === selectedUser.username) {  
@@ -212,7 +212,7 @@ const UserManagement = () => {
   // Delete user
   const handleDeleteUser = async () => {  
     try {  
-      await adminService.deleteUser(selectedUser.username);
+      await userService.deleteUser(selectedUser.username);
       
       const remainingUsers = users.filter(user => user.username !== selectedUser.username);  
       

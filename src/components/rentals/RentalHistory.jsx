@@ -24,7 +24,6 @@ import { useNavigate } from 'react-router-dom';
 import { useRental } from '../../contexts/RentalContext';
 import { useAuth } from '../../contexts/AuthContext';
 import rentalService from '../../services/rental.service';
-import walletService from '../../services/wallet.service';
 import '../../styles/components/RentalHistory.css';
 
 const RentalHistory = () => {

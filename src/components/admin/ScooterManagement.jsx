@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';  
-import { Container, Row, Col, Card, Table, Form, Button, InputGroup, Modal, Badge, Pagination, Nav, Tab, Alert } from 'react-bootstrap';  
-import { FaSearch, FaFilter, FaPlus, FaEdit, FaTimes, FaTrash, FaExclamationTriangle, FaFileExport, FaSortAmountDown, FaSortAmountUp, FaBatteryFull, FaBatteryHalf, FaBatteryEmpty, FaLocationArrow, FaExchangeAlt, FaBicycle, FaQrcode } from 'react-icons/fa';  
-import adminService from '../../services/admin.service';  
+import { Container, Row, Col, Card, Table, Form, Button, InputGroup, Modal, Badge, Pagination, Nav, Alert } from 'react-bootstrap';
+import { FaSearch, FaPlus, FaEdit, FaTrash, FaExclamationTriangle, FaFileExport, FaSortAmountDown, FaSortAmountUp, FaBatteryFull, FaBatteryHalf, FaBatteryEmpty, FaLocationArrow, FaBicycle, FaQrcode } from 'react-icons/fa';  
+import scooterService from '../../services/scooter.service';
 
 const ScooterManagement = () => {  
   const [scooters, setScooters] = useState([]);  
@@ -44,7 +44,7 @@ const ScooterManagement = () => {
     const fetchScooters = async () => {  
       try {  
         setIsLoading(true);  
-        const response = await adminService.getScooterStats();  // 使用统计接口
+        const response = await scooterService.getScooterStats();  // 使用统计接口
         console.log('Fetched scooters raw response:', response); // Log raw response
         
         // 确保响应是数组
@@ -189,7 +189,7 @@ const ScooterManagement = () => {
         longitude: parseFloat(scooterForm.longitude) || 0
       };
       
-      const newScooter = await adminService.createScooter(scooterData);  
+      const newScooter = await scooterService.createScooter(scooterData);  
       
       setScooters([newScooter, ...scooters]);  
       setShowAddModal(false);  
@@ -244,7 +244,7 @@ const ScooterManagement = () => {
       };
       
       // Use the single update endpoint
-      const updatedScooter = await adminService.updateScooter(selectedScooter.id, scooterData);
+      const updatedScooter = await scooterService.updateScooter(selectedScooter.id, scooterData);
       
       const updatedScooters = scooters.map(scooter => {  
         if (scooter.id === selectedScooter.id) {  
@@ -266,7 +266,7 @@ const ScooterManagement = () => {
   // 删除滑板车  
   const handleDeleteScooter = async () => {  
     try {  
-      await adminService.deleteScooter(selectedScooter.id);  
+      await scooterService.deleteScooter(selectedScooter.id);  
       
       const remainingScooters = scooters.filter(scooter => scooter.id !== selectedScooter.id);  
       
@@ -282,7 +282,7 @@ const ScooterManagement = () => {
   // 更新滑板车状态  
   const handleStatusChange = async (scooter, newStatus) => {  
     try {  
-      const updatedScooter = await adminService.updateScooterStatus(scooter.id, newStatus);  
+      const updatedScooter = await scooterService.updateScooterStatus(scooter.id, newStatus);  
       
       const updatedScooters = scooters.map(s => {  
         if (s.id === scooter.id) {  
@@ -434,7 +434,7 @@ const ScooterManagement = () => {
       console.log('Updating scooter price with:', priceData);
       
       // 使用专用的价格更新API端点
-      const updatedScooter = await adminService.updateScooterPrice(priceData);
+      const updatedScooter = await scooterService.updateScooterPrice(priceData);
       
       // 更新状态中的滑板车价格信息
       const updatedScooters = scooters.map(scooter => {  

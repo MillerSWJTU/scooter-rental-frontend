@@ -32,8 +32,8 @@ const PaymentResult = () => {
           setPayment(paymentData);
           
           // 如果支付成功，更新支付状态
-          if (paymentData.status === 'COMPLETED' && paymentData.rentalId) {
-            updatePaidRentals(paymentData.rentalId);
+          if (paymentData.status === 'COMPLETED') {
+            // 支付成功
           }
         } 
         // 如果有交易ID和状态，处理回调
@@ -51,8 +51,8 @@ const PaymentResult = () => {
           });
           
           // 如果支付成功且有租赁ID，更新支付状态
-          if (status === 'COMPLETED' && rentalId) {
-            updatePaidRentals(Number(rentalId));
+          if (status === 'COMPLETED') {
+            // 支付成功
           }
         } else {
           setError('无效的支付查询');
@@ -67,27 +67,6 @@ const PaymentResult = () => {
     
     fetchPaymentDetails();
   }, [paymentId, transactionId, status, rentalId]);
-  
-  // 更新已支付租赁记录
-  const updatePaidRentals = (id) => {
-    if (!id) return;
-    
-    try {
-      const savedPaidRentals = localStorage.getItem('paidRentals');
-      let paidRentals = [];
-      
-      if (savedPaidRentals) {
-        paidRentals = JSON.parse(savedPaidRentals);
-      }
-      
-      if (!paidRentals.includes(id)) {
-        paidRentals.push(id);
-        localStorage.setItem('paidRentals', JSON.stringify(paidRentals));
-      }
-    } catch (e) {
-      console.error('更新已支付租赁记录失败:', e);
-    }
-  };
   
   const handleBackToRentals = () => {
     navigate('/rentals');

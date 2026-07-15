@@ -37,7 +37,7 @@ const FeedbackPage = () => {
                 className="mb-3"
               >
                 <Tab eventKey="list" title="My Feedback">
-                  <FeedbackList onMessage={setMessage} />
+                  <FeedbackList />
                 </Tab>
                 <Tab eventKey="new" title="Submit Feedback">
                   <FeedbackForm onSuccess={() => {

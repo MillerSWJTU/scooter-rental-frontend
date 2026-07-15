@@ -11,7 +11,7 @@ import {
   Col,
   Card
 } from 'react-bootstrap';
-import adminService from '../../services/admin.service';
+import feedbackService from '../../services/feedback.service';
 
 const FeedbackManagement = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -30,7 +30,7 @@ const FeedbackManagement = () => {
   const fetchFeedbacks = async () => {
     try {
       setLoading(true);
-      const response = await adminService.getAllFeedbacks();
+      const response = await feedbackService.getAllFeedbacks();
       setFeedbacks(response);
       setError(null);
     } catch (err) {
@@ -49,7 +49,7 @@ const FeedbackManagement = () => {
 
   const handleSubmitReply = async () => {
     try {
-      await adminService.updateFeedback(selectedFeedback.id, {
+      await feedbackService.updateFeedback(selectedFeedback.id, {
         adminResponse: replyContent,
         status: 'RESOLVED'
       });

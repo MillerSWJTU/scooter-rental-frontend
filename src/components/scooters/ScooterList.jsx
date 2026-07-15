@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Spinner, Alert } from 'react-bootstrap';
-import { FaSearch, FaMapMarkerAlt, FaFilter, FaSortAmountDown } from 'react-icons/fa';
+import { Container, Row, Col, Button, Spinner, Alert } from 'react-bootstrap';
+import { FaMapMarkerAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import ScooterItem from './ScooterItem';
 import Map from '../common/Map';

@@ -52,11 +52,6 @@ export const formatCurrency = (amount) => {
     }  
   };  
   
-  // Calculate rental cost based on duration and rate  
-  export const calculateRentalCost = (durationInMinutes, ratePerMinute, baseRate = 0) => {  
-    return baseRate + (durationInMinutes * ratePerMinute);  
-  };  
-  
   // Get scooter battery color based on level  
   export const getBatteryLevelColor = (level) => {  
     if (level >= 70) return 'success';  
