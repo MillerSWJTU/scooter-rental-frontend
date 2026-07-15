@@ -40,19 +40,19 @@ const Dashboard = () => {
         setUserRoles(roleData);
         
         // Fetch weekly income by rental plan
-        const weeklyIncomeData = await adminService.getWeeklyRentalIncome();
+        const weeklyIncomeData = await adminService.getRevenueWeekly();
         setWeeklyRentalIncome(weeklyIncomeData);
-        
+
         // Fetch rental plan statistics
         const planStats = await adminService.getRentalPlanStats();
         setRentalPlanStats(planStats);
-        
-        // Fetch combined daily income
+
+        // Fetch daily revenue
         try {
-          const dailyIncomeData = await adminService.getCombinedDailyIncome();
+          const dailyIncomeData = await adminService.getRevenueDaily();
           setCombinedDailyIncome(dailyIncomeData);
         } catch (err) {
-          console.error('Failed to fetch combined daily income:', err);
+          console.error('Failed to fetch daily revenue:', err);
         }
         
         // Fetch total stats
